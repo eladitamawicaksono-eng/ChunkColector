@@ -1,0 +1,51 @@
+name: Build ChunkCollector
+
+# Jalan otomatis tiap push/PR ke branch main, dan bisa dijalankan manual lewat tab Actions
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "pom.xml"
+      - "src/**"
+      - ".github/workflows/build.yml"
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    name: Build & Package JAR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+
+      - name: Build dengan Maven
+        run: mvn -B clean package --file pom.xml
+
+      - name: Upload hasil build (ChunkCollector.jar)
+        uses: actions/upload-artifact@v4
+        with:
+          name: ChunkCollector-jar
+          path: target/ChunkCollector.jar
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Buat GitHub Release otomatis (hanya saat push ke main)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: "ChunkCollector build #${{ github.run_number }}"
+          files: target/ChunkCollector.jar
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
