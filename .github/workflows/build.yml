@@ -12,6 +12,10 @@ on:
     branches: [ "main" ]
   workflow_dispatch: {}
 
+# Wajib ada supaya GITHUB_TOKEN bawaan diizinkan membuat release (default repo sering read-only)
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build & Package JAR
