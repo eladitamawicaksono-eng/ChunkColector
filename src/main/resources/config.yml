@@ -1,0 +1,64 @@
+# =====================================================
+#  ChunkCollector - Konfigurasi
+# =====================================================
+
+# Limit default untuk pemain yang tidak punya permission chunkcollector.limit.<n> apapun.
+# Contoh setup rank di webstore-mu:
+#   Default (gratis)  -> default-limit: 1
+#   VIP                -> beri permission chunkcollector.limit.3
+#   MVP                -> beri permission chunkcollector.limit.5
+#   MVP+               -> beri permission chunkcollector.limit.10
+default-limit: 1
+
+# Berapa lama (detik) delay auto-collect mengambil item baru di sekitar collector, 0 = instan tiap item spawn
+collect-interval-seconds: 0
+
+# Hanya 1 collector diperbolehkan per chunk (disarankan true untuk mencegah spam/lag)
+one-per-chunk: true
+
+# Ukuran storage internal tiap collector (harus kelipatan 9, maksimal 54)
+storage-size: 45
+
+# Nama & lore item Chunk Collector yang diberikan ke pemain
+item:
+  material: CHEST
+  name: "&6&lChunk Collector"
+  lore:
+    - "&7Tempatkan block ini untuk mengumpulkan"
+    - "&7semua item yang jatuh di chunk ini."
+    - ""
+    - "&eKlik kanan setelah ditempatkan untuk membuka storage."
+
+# Harga jual item (dipakai tombol "Sell All" di GUI, memakai economy Vault)
+# Tambahkan/ubah sesuai harga di EconomyShopGUI kamu agar konsisten.
+prices:
+  DIAMOND: 50.0
+  EMERALD: 20.0
+  GOLD_INGOT: 10.0
+  IRON_INGOT: 5.0
+  ROTTEN_FLESH: 0.5
+  BONE: 0.5
+  STRING: 0.5
+  GUNPOWDER: 1.0
+  ENDER_PEARL: 15.0
+  NETHERITE_SCRAP: 200.0
+
+# Item yang TIDAK akan pernah diambil otomatis oleh collector (contoh: item event/quest)
+blacklist:
+  - NETHER_STAR
+  - TOTEM_OF_UNDYING
+
+messages:
+  prefix: "&6[ChunkCollector] &r"
+  no-permission: "&cKamu tidak punya izin untuk melakukan ini."
+  limit-reached: "&cKamu sudah mencapai batas maksimal Chunk Collector (%limit%). Upgrade rank untuk menambah slot!"
+  one-per-chunk: "&cHanya boleh ada 1 Chunk Collector per chunk."
+  placed: "&aChunk Collector berhasil ditempatkan! (%current%/%limit%)"
+  removed: "&eChunk Collector diambil kembali dan dikembalikan ke inventorymu."
+  not-owner: "&cHanya pemilik yang bisa membongkar Chunk Collector ini."
+  gui-title: "&8Chunk Collector"
+  sell-success: "&aBerhasil menjual seluruh isi collector seharga &e$%amount%&a."
+  sell-empty: "&cTidak ada item yang bisa dijual di collector ini."
+  no-vault: "&cFitur jual tidak tersedia, Vault economy tidak terdeteksi."
+  gave-item: "&aBerhasil memberikan %amount%x Chunk Collector kepada %player%."
+  reload-success: "&aKonfigurasi ChunkCollector berhasil dimuat ulang."

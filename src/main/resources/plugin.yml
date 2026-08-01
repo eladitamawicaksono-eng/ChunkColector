@@ -1,0 +1,33 @@
+name: ChunkCollector
+version: '${project.version}'
+main: com.lifesteal.chunkcollector.ChunkCollectorPlugin
+api-version: '1.21'
+author: LifestealServer
+description: Plugin Chunk Collector untuk server Lifesteal - kumpulkan drop se-chunk otomatis dengan sistem limit per rank.
+softdepend: [Vault]
+
+commands:
+  collector:
+    description: Perintah utama ChunkCollector
+    usage: /collector <give|limit|reload>
+    aliases: [cc, chunkcollector]
+
+permissions:
+  chunkcollector.admin:
+    description: Akses penuh ke perintah admin ChunkCollector (give, reload)
+    default: op
+  chunkcollector.use:
+    description: Izin dasar menempatkan & membuka Chunk Collector
+    default: true
+  chunkcollector.limit.1:
+    description: Batas 1 Chunk Collector
+    default: false
+  chunkcollector.limit.3:
+    description: Batas 3 Chunk Collector (contoh rank VIP)
+    default: false
+  chunkcollector.limit.5:
+    description: Batas 5 Chunk Collector (contoh rank MVP)
+    default: false
+  chunkcollector.limit.10:
+    description: Batas 10 Chunk Collector (contoh rank MVP+)
+    default: false
